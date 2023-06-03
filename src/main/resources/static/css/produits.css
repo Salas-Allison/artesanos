@@ -1,0 +1,66 @@
+#map {
+    flex: 1;
+    height: 50%;
+}
+
+.under-map {
+    margin-top: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+#liste-produits {
+    height: 300px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+table {
+    background-color: #efad5e;
+    width: 100%;
+    border-collapse: collapse; /* Pas de bordures du tout. */
+    font-size: medium;
+}
+
+thead th {
+    position: sticky; /* Permet de faire en sorte que la ligne d'entête reste fixe quand on scroll. */
+    top: 0; /* Permet de positionner vraiment en haut du div sinon il y a un léger décalage lors du scroll. */
+    padding: 10px;
+    font-weight: bold;
+    font-size: medium;
+    text-align: center;
+    background-color: yellowgreen;
+}
+
+td {
+    text-align: center;
+    cursor: default;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+tbody tr:hover {
+    background-color: rgb(187, 187, 187);
+    cursor: default;
+}
+
+.action-edit-produit {
+    color: white;
+    background-color: #333;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.action-edit-produit:hover {
+    background-color: black;
+    color: white;
+}

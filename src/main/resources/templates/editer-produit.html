@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr" th:lang="${#locale.country}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{produits.edit.title}">Editer un produit</title>
+    <link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" href="../static/css/forms.css" th:href="@{/css/forms.css}">
+    <link rel="stylesheet" href="../static/css/ajouter-produit.css" th:href="@{/css/ajouter-produit.css}">
+</head>
+<body>
+<h1 th:text="#{produits.edit.title}">Editer un produit</h1>
+<div class="form-container">
+    <form th:object="${produit}" th:action="@{/editer-produit}" method="post">
+        <div class="form">
+            <input type="hidden" name="id" th:field="*{id}">
+            <input type="hidden" name="description" th:field="*{description}">
+            <input type="hidden" name="prix" th:field="*{prix}">
+            <input type="hidden" name="image" th:field="*{image}">
+
+            <label for="name" th:text="#{produits.header.name}">Nom :</label>
+            <div>
+                <input type="text" id="name" th:field="*{nom}">
+                <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Error</span>
+            </div>
+            <label for="description" th:text="#{produits.header.description}">Description :</label>
+            <div>
+                <input type="text" id="description" th:field="*{description}">
+                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</span>
+            </div>
+            <label for="prix" th:text="#{produits.header.prix}">Prix :</label>
+            <div>
+                <input type="number" id="prix" th:field="*{prix}">
+                <span th:if="${#fields.hasErrors('prix')}" th:errors="*{prix}">Error</span>
+            </div>
+
+            <button id="btn-cancel" type="button" th:text="#{produits.cancel}">Annuler</button>
+            <button id="btn-ok" type="submit" th:text="#{produits.save}">Enregistrer</button>
+        </div>
+    </form>
+</div>
+<script src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+</body>
+</html>

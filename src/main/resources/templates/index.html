@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr" th:lang="${#locale.country}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>produits de Bretagne</title>
+    <link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" href="../static/css/produits.css" th:href="@{/css/produits.css}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+</head>
+<body>
+<h1 th:text="#{produits.title}">Les produits de votre région</h1>
+<div class="containerIndex">
+    <div id="liste-produits">
+        <table>
+            <thead>
+            <tr>
+                <th><span th:if="${sort} eq 'nom' and ${order eq 'desc'}">▲</span><span th:if="${sort} eq 'nom' and ${order eq 'asc'}">▼</span>
+                    <a th:href="@{/produits(sort=nom,order=(${sort} eq 'nom' ? ${order} : 'asc'))}" th:text="#{produits.header.name}">Nom</a>
+                </th>
+
+                <th><span th:if="${sort} eq 'description' and ${order eq 'desc'}">▲</span><span th:if="${sort} eq 'prix' and ${order eq 'asc'}">▼</span>
+                    <a th:href="@{/produits(sort=description,order=(${sort} eq 'description' ? ${order} : 'asc'))}" th:text="#{produits.header.description}">Description</a></th>
+
+                <th><span th:if="${sort} eq 'prix' and ${order eq 'desc'}">▲</span><span th:if="${sort} eq 'prix' and ${order eq 'asc'}">▼</span>
+                    <a th:href="@{/produits(sort=prix,order=(${sort} eq 'prix' ? ${order} : 'asc'))}" th:text="#{produits.header.prix}">Prix</a></th>
+                <th>
+                    Image
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="produit : ${produits}" th:object="${produit}">
+                <td th:text="*{nom}">n.a.</td>
+                <td th:text="*{description}">n.a.</td>
+                <td th:text="*{prix}">n.a.</td>
+                <td><img th:src="*{image}" /></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="containerIndex">
+    <div id="map"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script src="../static/js/produits.js" th:src="@{/js/produits.js}"></script>
+<script src="../static/js/carto.js" th:src="@{/js/carto.js}"></script>
+
+<script>
+    addMarkerOnMap(-13.525008696446909, -71.96808927163082, "Cusco", "Cusco");
+</script>
+
+</body>
+<footer>
+    <div>Langue de l'application : <span th:text="${#locale}">en_US</span></div>
+</footer>
+
+</html>

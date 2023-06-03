@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" th:lang="${#locale.country}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{produits.add.title}">Créer un nouveau produit</title>
+    <link rel="stylesheet" href="../static/css/common.css" th:href="@{/css/common.css}">
+    <link rel="stylesheet" href="../static/css/forms.css" th:href="@{/css/forms.css}">
+    <link rel="stylesheet" href="../static/css/ajouter-produit.css" th:href="@{/css/ajouter-produit.css}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"/>
+</head>
+<body>
+<h1 th:text="#{produits.add.title}">Créer un nouveau produit</h1>
+<div class="errors" th:if="${#fields.hasErrors('produit')}">
+    <h4 th:text="#{global.errors}">All errors:</h4>
+    <ul>
+        <li th:each="err : ${#fields.errors('produit.*')}" th:text="${err}"/>
+    </ul>
+</div>
+<form th:object="${produit}" th:action="@{/ajouter-produit}" method="post">
+    <div class="form-container">
+        <div class="form">
+
+            <label for="name" th:text="#{produits.header.name}">Nom :</label>
+            <div>
+                <input type="text" id="name" th:field="*{nom}">
+                <span th:classappend="error" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Error</span>
+            </div>
+            <label for="description" th:text="#{produits.header.description}">Description :</label>
+            <div>
+                <input type="text" id="description" th:field="*{description}">
+                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Error</span>
+            </div>
+            <label for="prix" th:text="#{produits.header.prix}">Prix :</label>
+            <div>
+                <input type="number" id="prix" th:field="*{prix}">
+                <span th:if="${#fields.hasErrors('prix')}" th:errors="*{prix}">Error</span>
+            </div>
+            
+            <button id="btn-cancel" type="button" th:text="#{produits.cancel}">Annuler</button>
+            <button id="btn-ok" type="submit" th:text="#{produits.save}">Enregistrer</button>
+        </div>
+    </div>
+    <!-- Le code suivant est possible UNIQUEMENT à l'intérieur des balises <form></form>
+    <div th:if="${#fields.hasErrors('global')}">
+        <h3 th:text="#{global.errors}">Global errors:</h3>
+        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"/>
+    </div>
+    -->
+</form>
+<script src="../static/js/common.js" th:src="@{/js/common.js}"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</script>
+</body>
+</html>
